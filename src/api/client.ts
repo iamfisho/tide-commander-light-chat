@@ -28,10 +28,42 @@ export class ApiClient {
   // Health check
   async healthCheck(): Promise<boolean> {
     try {
-      await this.client.get('/health');
+      const url = `${this.client.defaults.baseURL}/health`;
+      console.log('🔍 [DEBUG] Intentando conexión a:', url);
+      console.log('🔍 [DEBUG] Timeout configurado:', this.client.defaults.timeout, 'ms');
+
+      const response = await this.client.get('/health');
+
+      console.log('✅ [DEBUG] Conexión exitosa!', response.status);
       return true;
-    } catch (error) {
-      console.error('Health check failed:', error);
+    } catch (error: any) {
+      console.error('❌ [DEBUG] Health check falló - Detalles completos:');
+      console.error('  → Código de error:', error.code);
+      console.error('  → Mensaje:', error.message);
+      console.error('  → URL intentada:', this.client.defaults.baseURL + '/health');
+
+      if (error.response) {
+        // El servidor respondió con un código de error
+        console.error('  → Status HTTP:', error.response.status);
+        console.error('  → Headers:', JSON.stringify(error.response.headers));
+        console.error('  → Data:', error.response.data);
+      } else if (error.request) {
+        // La petición se hizo pero no hubo respuesta
+        console.error('  → No hubo respuesta del servidor');
+        console.error('  → Request:', error.request);
+      }
+
+      // Detectar errores específicos de Android
+      if (error.message && error.message.includes('cleartext')) {
+        console.error('  ⚠️  ERROR DE CLEARTEXT: Android bloqueó la conexión HTTP');
+        console.error('  ⚠️  Se necesita configuración de network_security_config.xml');
+      } else if (error.code === 'ECONNABORTED') {
+        console.error('  ⚠️  TIMEOUT: El servidor no respondió a tiempo');
+      } else if (error.code === 'ERR_NETWORK' || error.code === 'ECONNREFUSED') {
+        console.error('  ⚠️  NO SE PUDO CONECTAR: Verifica que el servidor esté corriendo');
+      }
+
+      console.error('  → Error completo:', JSON.stringify(error, null, 2));
       return false;
     }
   }
