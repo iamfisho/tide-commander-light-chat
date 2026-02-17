@@ -299,7 +299,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙏 Acknowledgments
 
-- Built for [Tide Commander](https://github.com/deivid11/tide-commander) by Anthropic
+- Built for [Tide Commander](https://github.com/deivid11/tide-commander) by [David Alcalá] (https://github.com/deivid11)
 - Inspired by modern mobile chat interfaces
 - Community feedback and contributions
 
