@@ -1,7 +1,14 @@
 {
-  "name": "tide-mobile-expo",
-  "version": "1.0.0",
+  "name": "tide-commander-light-chat",
+  "version": "0.1.0",
   "main": "index.ts",
+  "description": "Lightweight mobile chat interface for Tide Commander - Monitor and control AI agents from your phone",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iamfisho/tide-commander-light-chat.git"
+  },
+  "author": "Your Name",
+  "license": "MIT",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -9,13 +16,26 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^2.2.0",
+    "@react-navigation/native": "^7.1.28",
+    "@react-navigation/stack": "^7.7.2",
+    "axios": "^1.13.5",
+    "date-fns": "^4.1.0",
     "expo": "~54.0.33",
+    "expo-clipboard": "^8.0.8",
     "expo-status-bar": "~3.0.9",
     "react": "19.1.0",
-    "react-native": "0.81.5"
+    "react-native": "0.81.5",
+    "react-native-gesture-handler": "~2.28.0",
+    "react-native-gifted-chat": "^3.3.2",
+    "react-native-markdown-display": "^7.0.2",
+    "react-native-safe-area-context": "~5.6.0",
+    "react-native-screens": "~4.16.0"
   },
   "devDependencies": {
     "@types/react": "~19.1.0",
+    "babel-plugin-module-resolver": "^5.0.2",
+    "babel-preset-expo": "^54.0.10",
     "typescript": "~5.9.2"
   },
   "private": true
